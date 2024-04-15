@@ -1,0 +1,3 @@
+## Diagram 
+
+![](/images/diagram.jpg)
