@@ -47,12 +47,15 @@ export class AuthService {
   }
 
   public async validate({ token }: ValidateRequest): Promise<ValidateResponse> {
+    console.log("🚀 ~ AuthService ~ validate ~ token:", token)
     const decoded: Auth = await this.jwtService.verify(token);
     if (!decoded) {
       return { status: HttpStatus.FORBIDDEN, error: ['Token is invalid'], userId: null };
     }
 
+    console.log("🚀 ~ AuthService ~ validate ~ decoded:", decoded)
     const auth: Auth = await this.jwtService.validateUser(decoded);
+    console.log("🚀 ~ AuthService ~ validate ~ auth:", auth)
     if (!auth) {
       return { status: HttpStatus.CONFLICT, error: ['User not found'], userId: null };
     }

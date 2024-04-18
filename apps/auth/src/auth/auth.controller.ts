@@ -28,6 +28,7 @@ export class AuthController {
 
   @GrpcMethod(AUTH_SERVICE_NAME, 'Validate')
   private validate(payload: ValidateRequest): Promise<ValidateResponse>{
+    console.log("🚀 ~ AuthController ~ validate ~ payload:", payload)
     return this.authService.validate(payload);
   }
 }

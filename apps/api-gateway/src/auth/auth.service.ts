@@ -17,6 +17,7 @@ export class AuthService {
   }
 
   public async validate(token: string): Promise<ValidateResponse> {
+    console.log("🚀 ~ AuthService ~ validate ~ token:", token)
     return firstValueFrom(this.svc.validate({ token }));
   }
 }

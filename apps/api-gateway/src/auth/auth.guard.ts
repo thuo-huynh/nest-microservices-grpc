@@ -18,22 +18,24 @@ export class AuthGuard implements CanActivate {
   public async canActivate(ctx: ExecutionContext): Promise<boolean> | never {
     const req: Request = ctx.switchToHttp().getRequest<Request>();
     const authorization: string = req.headers['authorization'];
+    console.log("🚀 ~ AuthGuard ~ canActivate ~ authorization:", authorization)
 
     if (!authorization) {
       throw new UnauthorizedException();
     }
 
     const bearer: string[] = authorization.split(' ');
+    console.log("🚀 ~ AuthGuard ~ canActivate ~ bearer:", bearer)
 
-    if (!bearer || bearer.length < 2) {
+    if (!bearer) {
       throw new UnauthorizedException();
     }
 
     const token: string = bearer[1];
 
-    const { status, userId }: ValidateResponse =
-      await this.service.validate(token);
-
+    const { status, userId }: ValidateResponse = await this.service.validate(token);
+    console.log("🚀 ~ AuthGuard ~ canActivate ~ userId:", userId);
+    
     (req as any).user = userId;
 
     if (status !== HttpStatus.OK) {

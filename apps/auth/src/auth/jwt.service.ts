@@ -16,7 +16,11 @@ export class JwtService {
     }
 
     public async validateUser(decoded: any): Promise<Auth> {
-    return this.repository.findOne(decoded.id);
+    return this.repository.findOne({
+        where: {
+            id: decoded.id
+        }
+    });
     }
 
     public generateToken(auth: Auth): string {
