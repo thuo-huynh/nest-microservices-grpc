@@ -30,10 +30,11 @@ export class AuthController implements OnModuleInit {
   private async register(
     @Body() body: RegisterRequest,
   ): Promise<Observable<RegisterResponse>> {
+    console.log("🚀 ~ AuthController ~ body:", body)
     return this.svc.register(body);
   }
 
-  @Put('login')
+  @Post('login')
   private async login(
     @Body() body: LoginRequest,
   ): Promise<Observable<LoginResponse>> {
